@@ -34,6 +34,7 @@ const Map = () => {
 
   return (
     <>
+      <h3>Click where you would like to go!</h3>
       <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef}></canvas>
     </>
   );
