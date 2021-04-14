@@ -10,7 +10,10 @@ function App() {
         <Route exact path="/">
           <Homepage />
         </Route>
-        <Route path="/Location">
+        <Route exact path="/Locations">
+          <Destination />
+        </Route>
+        <Route path="/Locations/:id">
           <Destination />
         </Route>
       </Switch>
