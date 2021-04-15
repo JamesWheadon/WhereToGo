@@ -1,7 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: rgb(200, 200, 200);
+}
+
+body {
+    position: relative;
+    width: 1000px;
+    margin: auto;
+    padding: 10px 0px;
+    background-color: white;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 2px 5px;
+    border: black 2px solid;
+    margin: 5px 2px;
+}
+
+.Intro {
+    padding-left: 50px;
+}
+
 #map {
+    position: relative;
+    left: 50px;
     background-image: url('https://geology.com/world/united-kingdom-map.gif');
+    cursor: pointer;
 }
 
 img {
-    width: 800px;
+    width: 1000px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 3em;
 }
