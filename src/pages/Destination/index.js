@@ -4,7 +4,6 @@ import {Location} from '../../components';
 import {Header} from '../../layout';
 
 const Destination = ({destinations}) => {
-    console.log(destinations)
     const renderDestination = () => {
         let { id } = useParams();
         if (id) {

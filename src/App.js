@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import {Homepage, Destination, RoadTrip} from './pages';
+import {Homepage, Destination, RoadTrip, Adventure} from './pages';
 
 function App() {
   const [destination, setDestination] = useState([
@@ -24,6 +24,9 @@ function App() {
         </Route>
         <Route path="/Road_Trip">
           <RoadTrip destinations={destination}/>
+        </Route>
+        <Route path="/ADventure">
+          <Adventure destinations={destination}/>
         </Route>
       </Switch>
     </>

@@ -6,10 +6,6 @@ const RoadTrip = ({ destinations }) => {
     const [stops, setStops] = useState([])
     const [locations, setLocations] = useState([])
 
-    useEffect(() => {
-        getStops();
-    }, [])
-
     const getStops = () => {
         let copy = destinations;
         let placesSummary = [];
@@ -32,6 +28,7 @@ const RoadTrip = ({ destinations }) => {
 
     return (
         <main aria-label="main" className="container">
+            {getStops()}
             <Header />
             <h2>Ready To Go?</h2>
             <Map interactive={false} stops={stops} />
