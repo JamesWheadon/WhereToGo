@@ -22,7 +22,6 @@ const RoadTrip = ({ destinations }) => {
         }
         setLocations(placesSummary)
         setStops(places)
-        console.log(destinations)
     }
 
     const renderStops = () => {

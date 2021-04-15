@@ -32,6 +32,7 @@ const Map = ({ interactive, stops }) => {
         context.fill();
         places.push(location)
       })
+      shortestTrip(places)
       context.beginPath();
       context.moveTo(places[0].x, places[0].y)
       for (let i = 1; i < places.length; i++) {
@@ -39,6 +40,18 @@ const Map = ({ interactive, stops }) => {
       }
       context.stroke();
     }
+  }
+
+  const shortestTrip = (places) => {
+    let adjacencyMatrix = [];
+    places.forEach(p1 => {
+      let matrixRow = [];
+      places.forEach(p2 => {
+        matrixRow.push(Math.sqrt(Math.abs(p1.x - p2.x) ** 2 + Math.abs(p1.y - p2.y) ** 2))
+      })
+      adjacencyMatrix.push(matrixRow);
+    })
+    console.log(adjacencyMatrix)
   }
 
   const findNearest = (x, y) => {
