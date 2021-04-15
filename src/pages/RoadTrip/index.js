@@ -2,11 +2,11 @@ import React from 'react';
 import {Map, Location} from '../../components';
 import {Header} from '../../layout';
 
-const RoadTrip = () => {
+const RoadTrip = ({destinations}) => {
   return (
     <main aria-label="main" className="container">
       <Header />
-      <Map />
+      <Map interactive={false}/>
     </main>
   )
 }

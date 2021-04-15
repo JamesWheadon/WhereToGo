@@ -8,7 +8,7 @@ const Homepage = () => {
       <Header />
       <Intro />
       <MapTagline />
-      <Map />
+      <Map interactive={true}/>
     </main>
   )
 }
