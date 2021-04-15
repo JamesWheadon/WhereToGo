@@ -1,3 +1,7 @@
 #map {
     background-image: url('https://geology.com/world/united-kingdom-map.gif');
 }
+
+img {
+    width: 800px;
+}

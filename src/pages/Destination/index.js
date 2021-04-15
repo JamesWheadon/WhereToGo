@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {useParams} from 'react-router-dom'
-import {Location} from '../../components'
+import {useParams} from 'react-router-dom';
+import {Location} from '../../components';
+import {Header} from '../../layout';
 
 const Destination = () => {
 
@@ -10,13 +11,19 @@ const Destination = () => {
 
     const renderDestination = () => {
         let { id } = useParams();
-        return destination.filter(l => l.id == id).map(l => 
+        if (id) {
+            return destination.filter(l => l.id == id).map(l => 
+                <Location place={l} key={l.id}/>
+            );
+        }
+        return destination.map(l => 
             <Location place={l} key={l.id}/>
         );
     }
 
     return (
         <main aria-label="main" className="container">
+            <Header />
             {renderDestination()}
         </main>
     )
