@@ -1,11 +1,14 @@
 import React from 'react';
-import {Intro, Map} from '../../components';
+import {Intro, MapTagline, Map} from '../../components';
+import {Header} from '../../layout';
 
 const Homepage = () => {
   return (
     <main aria-label="main" className="container">
+      <Header />
       <Intro />
-      <Map />
+      <MapTagline />
+      <Map interactive={true} stops={[]}/>
     </main>
   )
 }
