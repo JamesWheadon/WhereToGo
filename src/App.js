@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import {Homepage, Destination} from './pages';
+import {Homepage, Destination, RoadTrip} from './pages';
 
 function App() {
   return (
@@ -15,6 +15,9 @@ function App() {
         </Route>
         <Route path="/Locations/:id">
           <Destination />
+        </Route>
+        <Route path="/Road_Trip">
+          <RoadTrip />
         </Route>
       </Switch>
     </>
