@@ -32,17 +32,11 @@ const Map = ({ interactive, stops }) => {
         context.fill();
         places.push(location)
       })
-      shortestTrip(places)
-      context.beginPath();
-      context.moveTo(places[0].x, places[0].y)
-      for (let i = 1; i < places.length; i++) {
-        context.lineTo(places[i].x, places[i].y)
-      }
-      context.stroke();
+      shortestTrip(places, context)
     }
   }
 
-  const shortestTrip = (places) => {
+  const shortestTrip = (places, context) => {
     let adjacencyMatrix = [];
     places.forEach(p1 => {
       let matrixRow = [];
@@ -51,7 +45,39 @@ const Map = ({ interactive, stops }) => {
       })
       adjacencyMatrix.push(matrixRow);
     })
-    console.log(adjacencyMatrix)
+    let count = [];
+    while (count.length / 2 < places.length - 1) {
+      let min = shortestDistance(adjacencyMatrix)
+      context.beginPath();
+      context.moveTo(places[min.i].x, places[min.i].y)
+        context.lineTo(places[min.j].x, places[min.j].y)
+      context.stroke();
+      adjacencyMatrix[min.i][min.j] = 0;
+      adjacencyMatrix[min.j][min.i] = 0;
+      if (count.includes(min.i)) {
+        adjacencyMatrix.forEach(d => d[min.i] = 0);
+        adjacencyMatrix[min.i].forEach(d => d = 0);
+      }
+      if (count.includes(min.j)) {
+        adjacencyMatrix.forEach(d => d[min.j] = 0);
+        adjacencyMatrix[min.j].forEach(d => d = 0);
+      }
+      count.push(min.i, min.j);
+    }
+  }
+
+  const shortestDistance = (matrix) => {
+    let min = {d: 1400, i: 0, j: 0};
+    matrix.forEach(r => {
+      r.forEach(c => {
+        if (c < min.d && c != 0) {
+          min.d = c;
+          min.i = matrix.indexOf(r);
+          min.j = r.indexOf(c);
+        }
+      })
+    })
+    return min;
   }
 
   const findNearest = (x, y) => {
