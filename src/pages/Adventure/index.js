@@ -4,7 +4,9 @@ import { Header } from '../../layout';
 
 const Adventure = ({ destinations }) => {
     const renderAdventure = () => {
-        const id = Math.random() * destinations.length + 1;
+        console.log(destinations)
+        const id = Math.floor(Math.random() * destinations.length) + 1;
+        console.log(id)
         return destinations.filter(l => l.id == id).map(l =>
             <Location place={l} key={l.id} />
         );
