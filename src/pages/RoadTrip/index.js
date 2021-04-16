@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Map, Location, NewStop } from '../../components';
 import { Header } from '../../layout';
 
@@ -8,7 +8,7 @@ const RoadTrip = ({ destinations }) => {
     const [numStops, setNumStops] = useState(1)
     const [possibleStops, setPossibleStops] = useState(destinations.map(m => m))
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         getStops();
     }, [numStops])
 
@@ -25,9 +25,9 @@ const RoadTrip = ({ destinations }) => {
                 placesSummary.push(stop);
                 places.push(stop.id);
             }
-            console.log('update')
             setLocations(placesSummary);
             setStops(places);
+            console.log('update', numStops)
         } catch (err) {
             console.log('You\'re going everywhere already!')
         }
@@ -44,6 +44,7 @@ const RoadTrip = ({ destinations }) => {
 
     return (
         <main aria-label="main" className="container">
+            {console.log('render', numStops)}
             <Header />
             <h2>Ready To Go?</h2>
             <Map interactive={false} stops={stops} />
