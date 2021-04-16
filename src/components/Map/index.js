@@ -88,7 +88,7 @@ const Map = ({ interactive, stops }) => {
     let min;
     for (let i = 0; i < matrix.length; i++) {
       for (let j = 0; j < i; j++) {
-        c = matrix[i][j];
+        let c = matrix[i][j];
         if (c < min.d && c != 0 && c) {
           min.d = c;
           min.i = i;
