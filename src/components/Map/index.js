@@ -101,7 +101,7 @@ const Map = ({ interactive, stops }) => {
       {console.log('render call', stops)}
       {interactive ? 
       <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef}></canvas> : 
-      <canvas id="map" height="1080px" width="900px" ref={canvasRef} onLoad></canvas>}
+      <canvas id="map" height="1080px" width="900px" ref={canvasRef}></canvas>}
       {!interactive ? roadTrip() : console.log('no')}
     </>
   );

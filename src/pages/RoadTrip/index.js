@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Map, Location, NewStop } from '../../components';
 import { Header } from '../../layout';
 
@@ -8,24 +8,28 @@ const RoadTrip = ({ destinations }) => {
     const [numStops, setNumStops] = useState(1)
     const [possibleStops, setPossibleStops] = useState(destinations.map(m => m))
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         getStops();
     }, [numStops])
 
     const getStops = () => {
-        let placesSummary = locations;
-        let places = stops;
-        while (places.length < numStops) {
-            const random = Math.floor(Math.random() * possibleStops.length);
-            const stop = possibleStops.splice(random, 1)[0];
-            console.log('first stop', stop)
-            placesSummary.push(stop);
-            places.push(stop.id);
+        try {
+            let placesSummary = locations;
+            let places = stops;
+            while (places.length < numStops) {
+                const random = Math.floor(Math.random() * possibleStops.length);
+                const stop = possibleStops.splice(random, 1)[0];
+                console.log('first stop', stop)
+                placesSummary.push(stop);
+                places.push(stop.id);
+            }
+            setLocations(placesSummary);
+            setStops(places);
+            console.log(locations)
+            console.log(stops)
+        } catch (err) {
+            console.log('You\'re going everywhere already!')
         }
-        setLocations(placesSummary);
-        setStops(places);
-        console.log(locations)
-        console.log(stops)
     };
 
     const newStop = () => setNumStops(prevState => prevState + 1);
