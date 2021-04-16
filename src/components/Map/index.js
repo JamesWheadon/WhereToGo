@@ -1,12 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 const Map = ({ interactive, stops }) => {
-
-  useEffect(() => {
-    if (!interactive) {
-      roadTrip();
-    }
-  })
 
   const locations = [{ id: 1, x: 483, y: 982 }, { id: 2, x: 529, y: 561 }, { id: 3, x: 489, y: 717 }, { id: 4, x: 841, y: 905 }]
 
@@ -20,6 +14,7 @@ const Map = ({ interactive, stops }) => {
   }
 
   const roadTrip = () => {
+    console.log('road trips', stops)
     if (stops.length != 0) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
@@ -103,9 +98,11 @@ const Map = ({ interactive, stops }) => {
 
   return (
     <>
+      {console.log('render call', stops)}
       {interactive ? 
       <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef}></canvas> : 
-      <canvas id="map" height="1080px" width="900px" ref={canvasRef}></canvas>}
+      <canvas id="map" height="1080px" width="900px" ref={canvasRef} onLoad></canvas>}
+      {!interactive ? roadTrip() : console.log('no')}
     </>
   );
 };

@@ -24,6 +24,8 @@ const RoadTrip = ({ destinations }) => {
         }
         setLocations(placesSummary);
         setStops(places);
+        console.log(locations)
+        console.log(stops)
     };
 
     const newStop = () => setNumStops(prevState => prevState + 1);
