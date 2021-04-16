@@ -12,6 +12,8 @@ const RoadTrip = ({ destinations }) => {
         getStops();
     }, [numStops])
 
+    useEffect(() => newStop(), [])
+
     const getStops = () => {
         try {
             let placesSummary = locations;
@@ -27,7 +29,7 @@ const RoadTrip = ({ destinations }) => {
             }
             setLocations(placesSummary);
             setStops(places);
-            console.log('update', numStops)
+            console.log('update', numStops, locations)
         } catch (err) {
             console.log('You\'re going everywhere already!')
         }
