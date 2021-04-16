@@ -19,14 +19,15 @@ const RoadTrip = ({ destinations }) => {
             while (places.length < numStops) {
                 const random = Math.floor(Math.random() * possibleStops.length);
                 const stop = possibleStops.splice(random, 1)[0];
-                console.log('first stop', stop)
+                if (!stop) {
+                    throw new Error('Out of locations')
+                }
                 placesSummary.push(stop);
                 places.push(stop.id);
             }
+            console.log('update')
             setLocations(placesSummary);
             setStops(places);
-            console.log(locations)
-            console.log(stops)
         } catch (err) {
             console.log('You\'re going everywhere already!')
         }
@@ -35,9 +36,10 @@ const RoadTrip = ({ destinations }) => {
     const newStop = () => setNumStops(prevState => prevState + 1);
 
     const renderStops = () => {
-      return locations.map(l =>
-        <Location place={l} key={l.id}/>
-      );
+        console.log('locations', locations)
+        return locations.map(l =>
+            <Location place={l} key={l.id} />
+        );
     }
 
     return (
@@ -45,7 +47,7 @@ const RoadTrip = ({ destinations }) => {
             <Header />
             <h2>Ready To Go?</h2>
             <Map interactive={false} stops={stops} />
-            <NewStop clickFunction={newStop}/>
+            <NewStop clickFunction={newStop} />
             {renderStops()}
         </main>
     )

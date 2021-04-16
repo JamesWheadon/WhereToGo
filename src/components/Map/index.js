@@ -14,14 +14,12 @@ const Map = ({ interactive, stops }) => {
   }
 
   const roadTrip = () => {
-    console.log('road trips', stops)
     if (stops.length != 0) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       context.clearRect(0, 0, canvas.width, canvas.height);
       let places = []
       stops.forEach(s => {
-        console.log(s)
         let location = locations.filter(l => l.id === s)[0];
         context.beginPath();
         context.arc(location.x, location.y, 10, 0, 2 * Math.PI);
@@ -98,11 +96,10 @@ const Map = ({ interactive, stops }) => {
 
   return (
     <>
-      {console.log('render call', stops)}
       {interactive ? 
       <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef}></canvas> : 
       <canvas id="map" height="1080px" width="900px" ref={canvasRef}></canvas>}
-      {!interactive ? roadTrip() : console.log('no')}
+      {!interactive ? roadTrip() : console.log('not interactive')}
     </>
   );
 };
