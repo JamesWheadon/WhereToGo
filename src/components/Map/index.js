@@ -2,15 +2,16 @@ import React, { useRef } from 'react';
 
 const Map = ({ interactive, stops }) => {
 
-  const locations = [{ id: 1, x: 483, y: 982 }, { id: 2, x: 529, y: 561 }, { id: 3, x: 489, y: 717 }, { id: 4, x: 841, y: 905 }]
+  const locations = [{ id: 1, x: 483, y: 982 }, { id: 2, x: 529, y: 561 }, { id: 3, x: 489, y: 717 }, { id: 4, x: 841, y: 905 }, {id: 5, x: 631, y: 908}, {id: 6, x: 326, y: 477}, {id: 7, x: 450, y: 258}]
 
   const getCursorPosition = (event) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect()
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
+    console.log(x, y)
     const nearest = findNearest(x, y);
-    window.location.assign(window.location + `locations/${nearest.id}`)
+    //window.location.assign(window.location + `locations/${nearest.id}`)
   }
 
   const roadTrip = () => {
