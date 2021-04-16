@@ -9,9 +9,8 @@ const Map = ({ interactive, stops }) => {
     const rect = canvas.getBoundingClientRect()
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
-    console.log(x, y)
     const nearest = findNearest(x, y);
-    //window.location.assign(window.location + `locations/${nearest.id}`)
+    window.location.assign(window.location + `locations/${nearest.id}`)
   }
 
   const roadTrip = () => {
