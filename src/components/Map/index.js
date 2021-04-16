@@ -6,7 +6,7 @@ const Map = ({ interactive, stops }) => {
     if (!interactive) {
       roadTrip();
     }
-  }, [stops])
+  })
 
   const locations = [{ id: 1, x: 483, y: 982 }, { id: 2, x: 529, y: 561 }, { id: 3, x: 489, y: 717 }, { id: 4, x: 841, y: 905 }]
 
@@ -23,8 +23,10 @@ const Map = ({ interactive, stops }) => {
     if (stops.length != 0) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
+      context.clearRect(0, 0, canvas.width, canvas.height);
       let places = []
       stops.forEach(s => {
+        console.log(s)
         let location = locations.filter(l => l.id === s)[0];
         context.beginPath();
         context.arc(location.x, location.y, 10, 0, 2 * Math.PI);
