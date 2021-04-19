@@ -72,6 +72,25 @@ const Map = ({ interactive, stops }) => {
         }
       }
       count.push(min.i, min.j);
+      let iSubplot, jSubplot;
+      subplots.forEach(s => {
+        if (s.includes(min.i)) {
+          iSubplot = s;
+        }
+        if (s.includes(min.j)) {
+          jSubplot = s;
+        }
+      })
+      if (iSubplot && jSubplot) {
+        subplots = subplots.filter(s => s != iSubplot && s != jSubplot);
+        subplots.push(iSubplot.concat(jSubplot));
+      } else if (iSubplot && !jSubplot) {
+        iSubplot.push(min.j);
+      } else if (!iSubplot && jSubplot) {
+        jSubplot.push(min.i);
+      } else {
+        subplots.push([min.i, min.j]);
+      }
     }
   }
 
