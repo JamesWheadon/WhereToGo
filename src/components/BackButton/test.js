@@ -8,7 +8,7 @@ describe('BackButton', () => {
   });
 
   test('renders a back button', () => {
-    const btn = screen.getByRole('button', {id: 'back-button'});
+    const btn = screen.getByRole('button', { id: 'back-button' });
     expect(btn).toBeInTheDocument();
   });
 });
