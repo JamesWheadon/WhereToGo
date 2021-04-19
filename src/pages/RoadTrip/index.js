@@ -5,20 +5,17 @@ import { Header } from '../../layout';
 const RoadTrip = ({ destinations }) => {
     const [stops, setStops] = useState([])
     const [locations, setLocations] = useState([])
-    const [numStops, setNumStops] = useState(0)
-    const [possibleStops, setPossibleStops] = useState(destinations.map(m => m))
+    const [numStops, setNumStops] = useState(1)
+    const [possibleStops] = useState(destinations.map(m => m))
 
     useEffect(() => {
-        console.log('useEffect called', numStops)
         getStops();
-    }, [numStops])
-
-    useEffect(() => newStop(), [])
+    }, [numStops]);
 
     const getStops = () => {
         try {
-            let placesSummary = locations;
-            let places = stops;
+            let placesSummary = locations.map(l => l);
+            let places = stops.map(s => s);
             while (places.length < numStops) {
                 const random = Math.floor(Math.random() * possibleStops.length);
                 const stop = possibleStops.splice(random, 1)[0];
@@ -37,15 +34,14 @@ const RoadTrip = ({ destinations }) => {
 
     const newStop = () => {
         setNumStops(prevState => prevState + 1);
-        console.log('1 more stop');
     };
 
     const renderStops = () => {
         return locations.map(l =>
             <Location place={l} key={l.id} />
         );
-    }
-
+    };
+    
     return (
         <main aria-label="main" className="container">
             <Header />
@@ -54,6 +50,6 @@ const RoadTrip = ({ destinations }) => {
             <NewStop clickFunction={newStop} />
             {renderStops()}
         </main>
-    )
+    );
 }
 export default RoadTrip;
