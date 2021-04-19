@@ -42,20 +42,16 @@ const Map = ({ interactive, stops }) => {
       adjacencyMatrix.push(matrixRow);
     })
     let count = [];
+    let subplots = [];
     while (count.length / 2 < places.length - 1) {
       let min = shortestDistance(adjacencyMatrix)
-      if (count.includes(min.i) && count.includes(min.j)) {
-        adjacencyMatrix[min.i][min.j] = 0;
-        adjacencyMatrix[min.j][min.i] = 0;
-      } else {
-        context.beginPath();
-        context.moveTo(places[min.i].x, places[min.i].y)
-        context.lineTo(places[min.j].x, places[min.j].y)
-        context.stroke();
-        adjacencyMatrix[min.i][min.j] = 0;
-        adjacencyMatrix[min.j][min.i] = 0;
-        count.push(min.i, min.j);
-      }
+      context.beginPath();
+      context.moveTo(places[min.i].x, places[min.i].y)
+      context.lineTo(places[min.j].x, places[min.j].y)
+      context.stroke();
+      adjacencyMatrix[min.i][min.j] = 0;
+      adjacencyMatrix[min.j][min.i] = 0;
+      count.push(min.i, min.j);
     }
   }
 
