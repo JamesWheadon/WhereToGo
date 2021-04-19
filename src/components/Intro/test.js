@@ -6,8 +6,8 @@ describe('Intro', () => {
     render(<Intro />);
   });
 
-  test("renders the header and p tag with the correct content", () => {
-    const heading = screen.getByRole('heading', {className: 'Intro'});
+  test("renders the header tag", () => {
+    const heading = screen.getByRole('heading', { className: 'Intro' });
     expect(heading).toBeInTheDocument();
   });
 });
