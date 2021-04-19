@@ -130,8 +130,8 @@ const Map = ({ interactive, stops }) => {
   return (
     <>
       {interactive ?
-        <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef}></canvas> :
-        <canvas id="map" height="1080px" width="900px" ref={canvasRef}></canvas>}
+        <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef} aria-label="UK Map" role="img"></canvas> :
+        <canvas id="map" height="1080px" width="900px" ref={canvasRef} aria-label="UK Map" role="img"></canvas>}
       {!interactive ? roadTrip() : console.log('not interactive')}
     </>
   );
