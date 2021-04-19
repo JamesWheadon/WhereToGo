@@ -46,7 +46,7 @@ const Map = ({ interactive, stops }) => {
     loop1: while (count.length / 2 < places.length - 1) {
       let min = shortestDistance(adjacencyMatrix)
       for (let k = 0; k < subplots.length; k++) {
-        s = subplots[k];
+        let s = subplots[k];
         if (s.includes(min.i) && s.includes(min.j)) {
           adjacencyMatrix[min.i][min.j] = 0;
           adjacencyMatrix[min.j][min.i] = 0;
