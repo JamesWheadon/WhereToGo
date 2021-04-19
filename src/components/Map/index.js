@@ -43,8 +43,16 @@ const Map = ({ interactive, stops }) => {
     })
     let count = [];
     let subplots = [];
-    while (count.length / 2 < places.length - 1) {
+    loop1: while (count.length / 2 < places.length - 1) {
       let min = shortestDistance(adjacencyMatrix)
+      for (let k = 0; k < subplots.length; k++) {
+        s = subplots[k];
+        if (s.includes(min.i) && s.includes(min.j)) {
+          adjacencyMatrix[min.i][min.j] = 0;
+          adjacencyMatrix[min.j][min.i] = 0;
+          continue loop1;
+        }
+      }
       context.beginPath();
       context.moveTo(places[min.i].x, places[min.i].y)
       context.lineTo(places[min.j].x, places[min.j].y)
@@ -53,14 +61,14 @@ const Map = ({ interactive, stops }) => {
       adjacencyMatrix[min.j][min.i] = 0;
       if (count.includes(min.i)) {
         for (let k = 0; k < adjacencyMatrix.length; k++) {
-          adjacencyMatrix[k][i] = 0;
-          adjacencyMatrix[i][k] = 0;
+          adjacencyMatrix[k][min.i] = 0;
+          adjacencyMatrix[min.i][k] = 0;
         }
       }
       if (count.includes(min.j)) {
         for (let k = 0; k < adjacencyMatrix.length; k++) {
-          adjacencyMatrix[k][j] = 0;
-          adjacencyMatrix[j][k] = 0;
+          adjacencyMatrix[k][min.j] = 0;
+          adjacencyMatrix[min.j][k] = 0;
         }
       }
       count.push(min.i, min.j);
