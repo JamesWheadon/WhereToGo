@@ -51,6 +51,18 @@ const Map = ({ interactive, stops }) => {
       context.stroke();
       adjacencyMatrix[min.i][min.j] = 0;
       adjacencyMatrix[min.j][min.i] = 0;
+      if (count.includes(min.i)) {
+        for (let k = 0; k < adjacencyMatrix.length; k++) {
+          adjacencyMatrix[k][i] = 0;
+          adjacencyMatrix[i][k] = 0;
+        }
+      }
+      if (count.includes(min.j)) {
+        for (let k = 0; k < adjacencyMatrix.length; k++) {
+          adjacencyMatrix[k][j] = 0;
+          adjacencyMatrix[j][k] = 0;
+        }
+      }
       count.push(min.i, min.j);
     }
   }
