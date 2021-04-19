@@ -14,7 +14,6 @@ const Map = ({ interactive, stops }) => {
   }
 
   const roadTrip = () => {
-    console.log('called with', stops)
     if (stops.length != 0) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");

@@ -5,10 +5,11 @@ import { Header } from '../../layout';
 const RoadTrip = ({ destinations }) => {
     const [stops, setStops] = useState([])
     const [locations, setLocations] = useState([])
-    const [numStops, setNumStops] = useState(1)
+    const [numStops, setNumStops] = useState(0)
     const [possibleStops, setPossibleStops] = useState(destinations.map(m => m))
 
     useEffect(() => {
+        console.log('useEffect called', numStops)
         getStops();
     }, [numStops])
 
@@ -29,16 +30,17 @@ const RoadTrip = ({ destinations }) => {
             }
             setLocations(placesSummary);
             setStops(places);
-            console.log('update', numStops, locations)
         } catch (err) {
             console.log('You\'re going everywhere already!')
         }
     };
 
-    const newStop = () => setNumStops(prevState => prevState + 1);
+    const newStop = () => {
+        setNumStops(prevState => prevState + 1);
+        console.log('1 more stop');
+    };
 
     const renderStops = () => {
-        console.log('locations', locations)
         return locations.map(l =>
             <Location place={l} key={l.id} />
         );
@@ -46,7 +48,6 @@ const RoadTrip = ({ destinations }) => {
 
     return (
         <main aria-label="main" className="container">
-            {console.log('render', numStops)}
             <Header />
             <h2>Ready To Go?</h2>
             <Map interactive={false} stops={stops} />
