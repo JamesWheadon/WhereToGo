@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 const Map = ({ interactive, stops }) => {
 
-  const locations = [{ id: 1, x: 483, y: 982 }, { id: 2, x: 529, y: 561 }, { id: 3, x: 489, y: 717 }, { id: 4, x: 841, y: 905 }]
+  const locations = [{ id: 1, x: 483, y: 982 }, { id: 2, x: 529, y: 561 }, { id: 3, x: 489, y: 717 }, { id: 4, x: 841, y: 905 }, { id: 5, x: 631, y: 908 }, { id: 6, x: 326, y: 477 }, { id: 7, x: 450, y: 258 }]
 
   const getCursorPosition = (event) => {
     const canvas = canvasRef.current;
@@ -14,7 +14,6 @@ const Map = ({ interactive, stops }) => {
   }
 
   const roadTrip = () => {
-    console.log('called with', stops)
     if (stops.length != 0) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
@@ -42,37 +41,70 @@ const Map = ({ interactive, stops }) => {
       adjacencyMatrix.push(matrixRow);
     })
     let count = [];
-    while (count.length / 2 < places.length - 1) {
+    let subplots = [];
+    loop1: while (count.length / 2 < places.length - 1) {
       let min = shortestDistance(adjacencyMatrix)
+      for (let k = 0; k < subplots.length; k++) {
+        let s = subplots[k];
+        if (s.includes(min.i) && s.includes(min.j)) {
+          adjacencyMatrix[min.i][min.j] = 0;
+          adjacencyMatrix[min.j][min.i] = 0;
+          continue loop1;
+        }
+      }
       context.beginPath();
       context.moveTo(places[min.i].x, places[min.i].y)
-        context.lineTo(places[min.j].x, places[min.j].y)
+      context.lineTo(places[min.j].x, places[min.j].y)
       context.stroke();
       adjacencyMatrix[min.i][min.j] = 0;
       adjacencyMatrix[min.j][min.i] = 0;
       if (count.includes(min.i)) {
-        adjacencyMatrix.forEach(d => d[min.i] = 0);
-        adjacencyMatrix[min.i].forEach(d => d = 0);
+        for (let k = 0; k < adjacencyMatrix.length; k++) {
+          adjacencyMatrix[k][min.i] = 0;
+          adjacencyMatrix[min.i][k] = 0;
+        }
       }
       if (count.includes(min.j)) {
-        adjacencyMatrix.forEach(d => d[min.j] = 0);
-        adjacencyMatrix[min.j].forEach(d => d = 0);
+        for (let k = 0; k < adjacencyMatrix.length; k++) {
+          adjacencyMatrix[k][min.j] = 0;
+          adjacencyMatrix[min.j][k] = 0;
+        }
       }
       count.push(min.i, min.j);
+      let iSubplot, jSubplot;
+      subplots.forEach(s => {
+        if (s.includes(min.i)) {
+          iSubplot = s;
+        }
+        if (s.includes(min.j)) {
+          jSubplot = s;
+        }
+      })
+      if (iSubplot && jSubplot) {
+        subplots = subplots.filter(s => s != iSubplot && s != jSubplot);
+        subplots.push(iSubplot.concat(jSubplot));
+      } else if (iSubplot && !jSubplot) {
+        iSubplot.push(min.j);
+      } else if (!iSubplot && jSubplot) {
+        jSubplot.push(min.i);
+      } else {
+        subplots.push([min.i, min.j]);
+      }
     }
   }
 
   const shortestDistance = (matrix) => {
-    let min = {d: 1400, i: 0, j: 0};
-    matrix.forEach(r => {
-      r.forEach(c => {
+    let min = {d: 1400};
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = 0; j < i; j++) {
+        let c = matrix[i][j];
         if (c < min.d && c != 0) {
           min.d = c;
-          min.i = matrix.indexOf(r);
-          min.j = r.indexOf(c);
+          min.i = i;
+          min.j = j;
         }
-      })
-    })
+      }
+    }
     return min;
   }
 
@@ -97,9 +129,9 @@ const Map = ({ interactive, stops }) => {
 
   return (
     <>
-      {interactive ? 
-      <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef}></canvas> : 
-      <canvas id="map" height="1080px" width="900px" ref={canvasRef}></canvas>}
+      {interactive ?
+        <canvas id="map" height="1080px" width="900px" onClick={getCursorPosition} ref={canvasRef}></canvas> :
+        <canvas id="map" height="1080px" width="900px" ref={canvasRef}></canvas>}
       {!interactive ? roadTrip() : console.log('not interactive')}
     </>
   );
