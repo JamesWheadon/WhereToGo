@@ -15,6 +15,10 @@ describe('Interactive Map', () => {
         render(<Map interactive={true} stops={testStops}/>);
     });
 
+    afterAll(() => {
+        jest.clearAllMocks();
+    })
+
     test("renders the canvas with correct dimensions", () => {
         const canvas = screen.getByRole('img', { id: 'map' });
         expect(canvas).toBeInTheDocument();
@@ -26,5 +30,26 @@ describe('Interactive Map', () => {
         const canvas = screen.getByRole('img', { id: 'map' });
         userEvent.click(canvas);
         expect(window.location.assign).toBeCalled();
+    });
+});
+
+describe('Road Trip Map', () => {
+
+    delete window.location
+
+    window.location = {
+      assign: jest.fn(),
+    }
+
+    beforeEach(() => {
+        const testStops = [0, 1, 2]
+        render(<Map interactive={false} stops={testStops}/>);
+    });
+
+    test("renders the canvas with correct dimensions", () => {
+        const canvas = screen.getByRole('img', { id: 'map' });
+        expect(canvas).toBeInTheDocument();
+        expect(canvas.width).toEqual(900);
+        expect(canvas.height).toEqual(1080);
     });
 });
