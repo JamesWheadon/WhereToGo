@@ -1,6 +1,6 @@
 import React from 'react';
-import {Intro, MapTagline, Map} from '../../components';
-import {Header} from '../../layout';
+import { Intro, MapTagline, Map } from '../../components';
+import { Header } from '../../layout';
 
 const Homepage = () => {
   return (
@@ -8,7 +8,7 @@ const Homepage = () => {
       <Header />
       <Intro />
       <MapTagline />
-      <Map interactive={true} stops={[]}/>
+      <Map interactive={true} stops={[]} />
     </main>
   )
 }

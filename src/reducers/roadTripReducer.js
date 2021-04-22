@@ -1,4 +1,4 @@
-const initState = { numStops: 0, orderedLocationIds: [] }
+const initState = { numStops: 1, orderedLocationIds: [] }
 
 const roadTripReducer = (state=initState, action) => {
     switch(action.type) {

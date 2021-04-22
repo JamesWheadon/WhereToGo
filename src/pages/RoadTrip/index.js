@@ -6,14 +6,13 @@ import { loadNewStop } from '../../actions';
 
 const RoadTrip = ({ destinations }) => {
 
-    const NumStops = useSelector(state => state.numStops);
+    const numStops = useSelector(state => state.numStops);
     const orderedLocationIds = useSelector(state => state.orderedLocationIds);
 
     const dispatch = useDispatch();
 
     const [stops, setStops] = useState([])
     const [locations, setLocations] = useState([])
-    const [numStops, setNumStops] = useState(1)
     const [possibleStops] = useState(destinations.map(m => m))
 
     useEffect(() => {
@@ -41,7 +40,6 @@ const RoadTrip = ({ destinations }) => {
     };
 
     const newStop = () => {
-        setNumStops(prevState => prevState + 1);
         dispatch(loadNewStop());
     };
 

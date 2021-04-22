@@ -15,7 +15,6 @@ const Map = ({ interactive, stops }) => {
 
   const roadTrip = () => {
     if (stops.length != 0) {
-      console.log(canvasRef)
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
       context.clearRect(0, 0, canvas.width, canvas.height);
